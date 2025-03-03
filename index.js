@@ -21,6 +21,10 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: "server error" })
 })
 
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+})
+
 mongoose.connect(process.env.MONGO_URL)
 mongoose.connection.once("open", () => {
     console.log("db connected")
